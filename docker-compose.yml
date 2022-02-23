@@ -1,0 +1,18 @@
+version: '3.9'
+
+services:
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+    ports:
+      - 3306:3306
+  scripts:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    volumes:
+      - appdir:/home/mieko/develop/python/db_connect_docker/aap
+volumes:
+  appdir:
