@@ -6,13 +6,24 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: test_db
     ports:
       - 3306:3306
+    volumes:
+      - ./mariadb:/var/lib/mariadb
+      # copy the sql script to create tables
+      - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
   scripts:
     build:
       context: ./app
       dockerfile: Dockerfile
     volumes:
-      - appdir:/home/mieko/develop/python/db_connect_docker/aap
+      - ./app:/app
+    tty: true
+    depends_on:
+      - db
+    links:
+      - "db:database"
 volumes:
-  appdir:
+  app:
+  mariadb:

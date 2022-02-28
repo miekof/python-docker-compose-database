@@ -5,7 +5,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-engine = create_engine("mariadb+mariadbconnector://root:example@127.0.0.1:3306/test_db?charset=utf8mb4", pool_size=20)
+engine = create_engine("mariadb+mariadbconnector://root:example@database:3306/test_db?charset=utf8mb4", pool_size=20)
 Base = declarative_base()
 
 
@@ -53,5 +53,5 @@ if __name__ == '__main__':
     print('---------')
     add_test_info("Name A", 1)
     add_test_info("Name B", 2)
-    add_test_info("Name C", 3)
+    add_test_info("Name Cd", 3)
     print_all_list(select_all())
